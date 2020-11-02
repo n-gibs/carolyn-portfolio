@@ -13,14 +13,9 @@ const data = [
   },
   {
     id: 3,
-    text: "projects",
-    url: "/projects/",
+    text: "Case Studies",
+    url: "/case-studies/",
   },
-  // {
-  //   id: 4,
-  //   text: "blog",
-  //   url: "/blog/",
-  // },
   {
     id: 4,
     text: "contact",
