@@ -1,17 +1,21 @@
 import React from "react"
-import { graphql } from "gatsby"
 import Layout from "../components/Layout"
-import Hero from "../components/Hero"
-import Services from "../components/Services"
-import Jobs from "../components/Jobs"
+import { graphql } from "gatsby"
 import CaseStudies from "../components/CaseStudies"
-//import Blogs from "../components/Blogs"
-export default ({data}) => {
-  const {allStrapiCaseStudies: {nodes}} = data;
+import SEO from "../components/SEO"
+// ...GatsbyImageSharpFluid
+
+const CaseStudiesPage = ({
+  data: {
+    allStrapiCaseStudies: { nodes: studies },
+  },
+}) => {
   return (
-    <Layout children="index">
-      <Hero/>
-      <CaseStudies studies={nodes} showLink />
+    <Layout>
+      <SEO title="Case Studies" description="Carolyn's Case Studies"/>
+      <section className="projects-page">
+        <CaseStudies studies={studies} />
+      </section>
     </Layout>
   )
 }
@@ -35,4 +39,5 @@ export const query = graphql`
     }
   }
 `
-// ...GatsbyImageSharpFluid
+
+export default CaseStudiesPage

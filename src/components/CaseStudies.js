@@ -1,24 +1,31 @@
 import React from "react"
 import Title from "./Title"
 import CaseStudy from "./CaseStudy"
+import PropTypes from "prop-types"
 import { Link } from "gatsby"
-const CaseStudies = (studies, title, showLink) => {
-  console.log(studies);
+
+const CaseStudies = (props, studies, showLink) => {
+
   return (
     <section className="section projects">
-      <Title title={title} />
+      <Title title="Case Studies"/>
       <div className="section-center projects">
-        {studies.map((study, index) => {
+        {Object.values(props.studies).map((study, index) => {
           return <CaseStudy key={study.id} index={index} {...study} />
         })}
       </div>
       {showLink && (
         <Link to="/case-studies" className="btn center-btn">
-          projects
+          case studies
         </Link>
       )}
     </section>
   )
+}
+
+CaseStudies.propTypes = {
+  studies: PropTypes.array.isRequired,
+  showLink: PropTypes.bool.isRequired,
 }
 
 export default CaseStudies
