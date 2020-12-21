@@ -7,13 +7,14 @@ import SEO from "../components/SEO"
 
 const About = ({
   data: {
-    about: { nodes },
+    about
   },
 }) => {
-  const { title, description, image } = nodes[0]
+  console.log(about);
+  const { title, description, image } = about.nodes[0].data
   return (
     <Layout>
-    <SEO title="About" description="about Nicole"/>
+    <SEO title="About" description="about Carolyn"/>
       <section className="about-page">
         <div className="section-center about-center">
           <Image fluid={image.localFiles[0].childImageSharp.fluid} className="about-img" />
@@ -29,7 +30,7 @@ const About = ({
 
 export const query = graphql`
   {
-    allAirtable(filter: {table: {eq: "About"}}) {
+    about: allAirtable(filter: {table: {eq: "About"}}) {
       nodes {
         id
         data {
@@ -39,7 +40,7 @@ export const query = graphql`
             localFiles {
               childImageSharp {
                 fluid {
-                  tracedSVG
+                  ...GatsbyImageSharpFluid
                 }
               }
             }
