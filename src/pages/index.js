@@ -7,7 +7,7 @@ import Jobs from "../components/Jobs"
 import CaseStudies from "../components/CaseStudies"
 //import Blogs from "../components/Blogs"
 export default ({data}) => {
-  const {allStrapiCaseStudies: {nodes}} = data;
+  const {allAirtable: {nodes}} = data;
   return (
     <Layout children="index">
       <Hero/>
@@ -18,16 +18,22 @@ export default ({data}) => {
 
 export const query = graphql`
   {
-    allStrapiCaseStudies {
+    allAirtable(filter: {table: {eq: "Case Studies"}}) {
       nodes {
         id
-        slug
-        Title
-        description
-        image {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
+        data {
+          content
+          slug
+          title
+          description
+          url
+          image {
+            localFiles {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
             }
           }
         }
@@ -35,4 +41,3 @@ export const query = graphql`
     }
   }
 `
-// ...GatsbyImageSharpFluid

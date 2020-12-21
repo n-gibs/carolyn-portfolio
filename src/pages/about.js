@@ -16,7 +16,7 @@ const About = ({
     <SEO title="About" description="about Nicole"/>
       <section className="about-page">
         <div className="section-center about-center">
-          <Image fluid={image.childImageSharp.fluid} className="about-img" />
+          <Image fluid={image.localFiles[0].childImageSharp.fluid} className="about-img" />
           <article className="about-text">
             <Title title={title} />
             <p>{description}</p>
@@ -29,14 +29,19 @@ const About = ({
 
 export const query = graphql`
   {
-    about: allStrapiAbout {
+    allAirtable(filter: {table: {eq: "About"}}) {
       nodes {
-        title
-        description
-        image {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
+        id
+        data {
+          title
+          description
+          image {
+            localFiles {
+              childImageSharp {
+                fluid {
+                  tracedSVG
+                }
+              }
             }
           }
         }
@@ -44,5 +49,23 @@ export const query = graphql`
     }
   }
 `
+
+// export const query = graphql`
+//   {
+//     about: allStrapiAbout {
+//       nodes {
+//         title
+//         description
+//         image {
+//           childImageSharp {
+//             fluid {
+//               ...GatsbyImageSharpFluid
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `
 
 export default About

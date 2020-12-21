@@ -2,23 +2,28 @@ const path = require("path")
 
 // create pages dynamically
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
-  const result = await graphql(`
+  const { createPage } = actions;
+
+  const {data} = await graphql(`
     {
-      caseStudies: allStrapiCaseStudies {
+      studies:allAirtable(filter: { table: { eq: "Case Studies" } }) {
         nodes {
-          slug
+          data {
+            slug
+          }
         }
       }
     }
-  `)
+  `);
 
-  result.data.caseStudies.nodes.forEach(study => {
+  console.log(data)
+
+  data.studies.nodes.forEach(study => {
     createPage({
-      path: `/case-studies/${study.slug}`,
+      path: `/case-studies/${study.data.slug}`,
       component: path.resolve(`src/templates/projects-template.js`),
       context: {
-        slug: study.slug,
+        slug: study.data.slug,
       },
     })
   })

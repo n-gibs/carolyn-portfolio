@@ -4,22 +4,21 @@ import Image from "gatsby-image"
 import { FaGithubSquare, FaShareSquare } from "react-icons/fa"
 import { Link } from "gatsby"
 
-const CaseStudy = (props, Title, description, id, url, slug, image, index) => {
-  console.log(props);
+const CaseStudy = ({title, description, id, url, slug, image, index}) => {
   return (
     <article className="project">
-      {props.image && (
-        <Image fluid={props.image.childImageSharp.fluid} className="project-img" />
+      {image && (
+        <Image fluid={image.localFiles[0].childImageSharp.fluid} className="project-img" />
       )}
       <div className="project-info">
-        <span className="project-number">0{props.index + 1}.</span>
-        <h3>{props.Title || "default title"}</h3>
-        <p className="project-desc">{props.description}</p>
+        <span className="project-number">0{index + 1}.</span>
+        <h3>{title || "default title"}</h3>
+        <p className="project-desc">{description}</p>
         <div className="project-links">
-          <Link to={`/case-studies/${props.slug}`} className="btn center-btn">
+          <Link to={`/case-studies/${slug}`} className="btn center-btn">
             more info
           </Link>
-          {props.url && <a href={props.url}>
+          {url && <a href={url}>
             <FaShareSquare className="project-icon" />
           </a>}
 
@@ -30,7 +29,7 @@ const CaseStudy = (props, Title, description, id, url, slug, image, index) => {
 }
 
 CaseStudy.propTypes = {
-  Title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   url: PropTypes.string,
   description: PropTypes.string.isRequired,
   image: PropTypes.object.isRequired,

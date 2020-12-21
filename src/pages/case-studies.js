@@ -7,12 +7,12 @@ import SEO from "../components/SEO"
 
 const CaseStudiesPage = ({
   data: {
-    allStrapiCaseStudies: { nodes: studies },
+    allAirtable: { nodes: studies },
   },
 }) => {
   return (
     <Layout>
-      <SEO title="Case Studies" description="Carolyn's Case Studies"/>
+      <SEO title="Case Studies" description="Carolyn's Case Studies" />
       <section className="projects-page">
         <CaseStudies studies={studies} />
       </section>
@@ -22,16 +22,22 @@ const CaseStudiesPage = ({
 
 export const query = graphql`
   {
-    allStrapiCaseStudies {
+    allAirtable(filter: {table: {eq: "Case Studies"}}) {
       nodes {
         id
-        slug
-        Title
-        description
-        image {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
+        data {
+          content
+          slug
+          title
+          description
+          url
+          image {
+            localFiles {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
             }
           }
         }
@@ -39,5 +45,23 @@ export const query = graphql`
     }
   }
 `
+
+// {
+//   allStrapiCaseStudies {
+//     nodes {
+//       id
+//       slug
+//       Title
+//       description
+//       image {
+//         childImageSharp {
+//           fluid {
+//             ...GatsbyImageSharpFluid
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 export default CaseStudiesPage
