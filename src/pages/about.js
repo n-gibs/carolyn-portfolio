@@ -50,22 +50,4 @@ export const query = graphql`
   }
 `
 
-// export const query = graphql`
-//   {
-//     about: allStrapiAbout {
-//       nodes {
-//         title
-//         description
-//         image {
-//           childImageSharp {
-//             fluid {
-//               ...GatsbyImageSharpFluid
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// `
-
 export default About

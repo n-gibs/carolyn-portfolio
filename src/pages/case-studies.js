@@ -46,22 +46,4 @@ export const query = graphql`
   }
 `
 
-// {
-//   allStrapiCaseStudies {
-//     nodes {
-//       id
-//       slug
-//       Title
-//       description
-//       image {
-//         childImageSharp {
-//           fluid {
-//             ...GatsbyImageSharpFluid
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-
 export default CaseStudiesPage
